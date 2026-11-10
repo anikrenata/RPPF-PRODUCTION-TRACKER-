@@ -30,7 +30,7 @@ const SUPABASE_KEY='sb_publishable_27rM3xLKT3yG4a13MZQKkg_PJ26Z6sJ';
 const db=window.supabase?.createClient?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null;
 let products=[],batches=[],outputs=[],dispatches=[],monthlyPlans=[],isAdmin=false;
 const $=id=>document.getElementById(id), num=n=>Number(n||0).toLocaleString('en-US',{maximumFractionDigits:3});
-const PRODUCT_CATEGORIES=['Export','Local Product','Institutional Business','Physician Sample'];
+const PRODUCT_CATEGORIES=['Export Product','Local Product','Institutional Business Product','Physician Sample'];
 const today=()=>new Date().toISOString().slice(0,10);
 function msg(id,t,err=false){$(id).textContent=t;$(id).className=err?'err':'ok'}
 function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
