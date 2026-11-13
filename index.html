@@ -29,6 +29,20 @@ body.guest-view [onclick*="deleteCoreAreaRecord"],
 body.guest-view [onclick*="saveProductMasterValues"],
 body.guest-view [data-edit-plan],
 body.guest-view [data-delete-plan] { display:none !important; }
+</style><style id="selected-button-highlight">
+/* Clear visual state for the currently selected navigation and section buttons */
+button.active,
+button.secondary.active,
+nav.tabs button.active,
+.core-area-button.active {
+  background:#0878d1 !important;
+  color:#ffffff !important;
+  border:1px solid #075da5 !important;
+  box-shadow:0 0 0 3px rgba(8,120,209,.18),0 3px 9px rgba(8,70,130,.18) !important;
+  font-weight:800 !important;
+}
+.core-area-button.active span,
+.core-area-button.active small { color:#e6f3ff !important; }
 </style></head>
 <body>
 <header class="top"><img class="brand-logo" src="logo.svg" alt="RPPF Production Tracker — Production Output. Dispatch. Balance management"></header>
