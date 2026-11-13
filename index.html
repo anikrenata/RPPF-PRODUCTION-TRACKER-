@@ -87,4 +87,24 @@ $('dispatchBtn').onclick=async()=>{const btn=$('dispatchBtn');try{const v={produ
 async function checkSession(){if(window.location.hash.includes('type=recovery')){showPasswordReset();return}const {data:{session}}=await db.auth.getSession();$('month').value=today().slice(0,7);if(session&&session.user?.app_metadata?.role==='admin'){await enter(session.user);return}if(session){await enterGeneral(session.user);return}$('app').classList.remove('hidden');$('welcome').textContent='Public Dashboard (View Only)';$('logout').classList.add('hidden');document.querySelectorAll('[data-tab]').forEach(x=>{x.classList.toggle('hidden',!['dashboard','coreArea'].includes(x.dataset.tab));x.classList.toggle('active',x.dataset.tab==='dashboard')});document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('hidden',!['dashboard','coreArea'].includes(x.id)));await loadAll()}
 document.querySelectorAll('[data-tab]').forEach(btn=>{btn.addEventListener('click',()=>{const target=btn.dataset.tab;const allowed=isAdmin?['dashboard','import','outputs','dispatch','products','coreArea']:['dashboard','coreArea'];if(!allowed.includes(target))return;document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x.dataset.tab===target));document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('hidden',x.id!==target));});});
 checkSession().catch(e=>{console.error('Startup error:',e);const m=$('dashboardMsg');if(m)m.textContent='Dashboard load error: '+(e.message||'Unknown error');const lm=$('loginMsg');if(lm)lm.textContent=e.message||'Connection error';});
+</script><script>
+(function(){
+  function activateTrackerTab(button){
+    if(!button || button.classList.contains('hidden')) return;
+    var target=button.getAttribute('data-tab');
+    if(!target) return;
+    var panel=document.getElementById(target);
+    if(!panel) return;
+    document.querySelectorAll('nav.tabs [data-tab]').forEach(function(item){
+      item.classList.toggle('active',item===button);
+    });
+    document.querySelectorAll('section.tab').forEach(function(section){
+      section.classList.toggle('hidden',section.id!==target);
+    });
+  }
+  document.querySelectorAll('nav.tabs [data-tab]').forEach(function(button){
+    button.type='button';
+    button.onclick=function(){activateTrackerTab(button);};
+  });
+})();
 </script></body></html>
