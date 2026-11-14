@@ -251,7 +251,7 @@ checkSession().catch(e=>{console.error('Startup error:',e);const m=$('dashboardM
  window.loadCoreAreaProducts=load;
  $id('coreMasterSave').addEventListener('click',save);$id('coreMasterCancel').addEventListener('click',reset);$id('coreMasterRefresh').addEventListener('click',load);$id('coreMasterSearch').addEventListener('input',draw);
  $id('coreMasterRows').addEventListener('click',e=>{const editBtn=e.target.closest('[data-core-master-edit]'),delBtn=e.target.closest('[data-core-master-delete]');if(editBtn)edit(editBtn.dataset.coreMasterEdit);if(delBtn)del(delBtn.dataset.coreMasterDelete);});
- $id('coreProductMasterBack').addEventListener('click',()=>{reset();showCorePanel('records');});
+ $id('coreProductMasterBack').addEventListener('click',()=>{reset();document.getElementById('coreRecordsOpen').click();});
 })();
 </script>
 </body></html>
