@@ -198,7 +198,23 @@ checkSession().catch(e=>{console.error('Startup error:',e);const m=$('dashboardM
  function editDailyStock(id){if(!isAdmin)return;const r=dailyStockRows.find(x=>x.id===id);if(!r)return;dailyStockEditingId=id;el('stockProductName').value=r.product_name||'';el('stockBatchSize').value=r.batch_size||'';el('stockBatchNo').value=r.batch_no||'';el('stockProductionDate').value=r.production_date||today();el('stockHoldTime').value=/^\d{4}-\d{2}-\d{2}$/.test(r.hold_time_duration||'')?r.hold_time_duration:'';el('stockTotalKg').value=r.total_kg??'';el('stockTotalPcs').value=r.total_pcs??'';el('stockErpStatus').value=r.erp_release_status||'';el('stockRoomNo').value=r.room_no||'';el('stockIbcIpc').value=r.ibc_ipc||'';el('stockRemarks').value=r.remarks||'';el('dailyStockSave').textContent='Update Entry';el('dailyStockCancel').style.display='inline-block';dailyStockMsg('Editing selected daily stock record.');}
  async function deleteDailyStock(id){if(!isAdmin)return;const r=dailyStockRows.find(x=>x.id===id);if(!r||!confirm('Delete this daily stock record? This cannot be undone.'))return;const {error}=await db.from('daily_tablet_capsule_stock').delete().eq('id',id);if(error){dailyStockMsg('Delete failed: '+error.message,true);return;}dailyStockMsg('Daily stock record deleted.');await loadDailyStock();}
  function showCorePanel(which){if(isGuest&&which==='records')which='dashboard';const plans=which==='plan',dash=which==='dashboard',stock=which==='stock';el('corePlanForm').style.display=isAdmin?'grid':'none';el('dailyStockForm').style.display=isAdmin?'grid':'none';el('coreRecordsOpen').classList.toggle('hidden',isGuest);el('coreProcessSection').classList.toggle('hidden',plans||dash||stock);el('coreMonthlyPlanSection').classList.toggle('hidden',!plans);el('coreDashboardSection').classList.toggle('hidden',!dash);el('dailyStockSection').classList.toggle('hidden',!stock);el('coreRecordsOpen').classList.toggle('active',!plans&&!dash&&!stock);el('corePlanOpen').classList.toggle('active',plans);el('coreDashboardOpen').classList.toggle('active',dash);el('dailyStockOpen').classList.toggle('active',stock);if(plans)loadCorePlans();if(dash){loadCoreDashboard();loadDailyStock();}if(stock)loadDailyStock();}
- el('coreProductMasterOpen').addEventListener('click',()=>window.openTrackerTab('products'));
+ el('coreProductMasterOpen').addEventListener('click',()=>{
+  window.openTrackerTab('coreArea');
+  ['coreProcessSection','coreDashboardSection','coreRecordsSection','dailyStockSection'].forEach(id=>{const x=el(id);if(x)x.classList.add('hidden');});
+  const productPanel=el('products');
+  if(productPanel){
+    const core=el('coreArea');
+    if(productPanel.parentElement!==core)core.appendChild(productPanel);
+    productPanel.classList.remove('tab','hidden');
+    productPanel.style.display='block';
+  }
+});
+const coreProductBack=document.querySelector('#products h2')?.parentElement?.querySelector('button');
+if(coreProductBack)coreProductBack.onclick=()=>{
+  const p=el('products');if(p){p.style.display='none';p.classList.add('hidden');}
+  const process=el('coreProcessSection');if(process)process.classList.remove('hidden');
+  window.openTrackerTab('coreArea');
+};
  el('coreDashboardOpen').addEventListener('click',()=>showCorePanel('dashboard'));
  el('corePlanOpen').addEventListener('click',()=>showCorePanel('plan'));
  el('coreRecordsOpen').addEventListener('click',()=>showCorePanel('records'));
