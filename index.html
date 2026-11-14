@@ -68,7 +68,7 @@ nav.tabs button.active,
 <div><label for="stockTotalKg">Total KG</label><input id="stockTotalKg" type="number" min="0" step="0.001" placeholder="Enter total kg"></div>
 <div><label for="stockTotalPcs">Total PCS</label><input id="stockTotalPcs" type="number" min="0" step="0.001" placeholder="Enter total pcs"></div>
 <div><label for="stockRoomNo">Room No.</label><input id="stockRoomNo" type="text" placeholder="Enter room no."></div>
-<div><label for="stockIbcIpc">IBC/IPC</label><input id="stockIbcIpc" type="text" placeholder="Enter IBC/IPC"></div>
+<div><label for="stockIbcIpc">IBC/IPC</label><select id="stockIbcIpc"><option value="">Select IBC/IPC</option><option value="IBC">IBC</option><option value="IPC">IPC</option></select></div>
 <div style="grid-column:1/-1"><label for="stockRemarks">Remarks</label><textarea id="stockRemarks" rows="2" style="width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;font:inherit" placeholder="Write remarks..."></textarea></div>
 <div class="row" style="grid-column:1/-1;align-items:center"><button type="button" id="dailyStockSave">Save Entry</button><button type="button" class="secondary" id="dailyStockCancel" style="display:none">Cancel</button><span id="dailyStockMsg" class="muted"></span></div>
 </div>
