@@ -134,6 +134,38 @@ body.guest-view .auth-card{max-width:470px;margin:28px auto 18px;padding:24px;bo
 #productWiseDispatchSection .tablewrap{max-height:68vh;overflow:auto;overscroll-behavior:contain}
 #productWiseDispatchSection .tablewrap thead th{position:sticky;top:0;z-index:7;background:#eaf1f8;box-shadow:0 1px 0 #cbd8e5}
 
+
+/* Make the two main entry tabs stand out on the tracker landing view */
+body.guest-view nav.tabs button[data-tab="dashboard"],
+body.guest-view nav.tabs button[data-tab="coreArea"]{
+  padding:14px 25px;
+  min-height:48px;
+  font-size:16px;
+  font-weight:850;
+  letter-spacing:.2px;
+  color:#073b63;
+  background:linear-gradient(135deg,#e5f5ff 0%,#bfe8ff 48%,#d7f5f0 100%);
+  border:2px solid #65bce8;
+  border-radius:12px;
+  box-shadow:0 5px 14px rgba(10,111,169,.18);
+}
+body.guest-view nav.tabs button[data-tab="dashboard"].active,
+body.guest-view nav.tabs button[data-tab="coreArea"].active{
+  color:#fff !important;
+  background:linear-gradient(115deg,#075ca8 0%,#087fbd 52%,#079b91 100%) !important;
+  border-color:#087fbd !important;
+  box-shadow:0 7px 18px rgba(4,105,165,.32),0 0 0 3px rgba(45,174,220,.16) !important;
+  transform:translateY(-1px);
+}
+@media(max-width:650px){
+  body.guest-view nav.tabs button[data-tab="dashboard"],
+  body.guest-view nav.tabs button[data-tab="coreArea"]{
+    padding:12px 17px;
+    min-height:46px;
+    font-size:14px;
+  }
+}
+
 </style></head>
 <body>
 <header class="top"><img class="brand-logo" src="logo.svg" alt="RPPF Production Tracker — Production Output. Dispatch. Balance management"></header>
